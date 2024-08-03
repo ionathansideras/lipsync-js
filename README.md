@@ -1,13 +1,18 @@
 # lipsync-js
 
-**lipsync-js** is a powerful library for processing WAV audio files and generating mouth shapes for lip-sync animations. It uses Fast Fourier Transform (FFT) to analyze the audio data and map it to predefined mouth shapes, enabling realistic lip-syncing for animated characters.
+![lipsync-js](image.png)
+
+**lipsync-js** is a powerful library for processing WAV audio files and generating mouth shapes for lip-sync animations. It uses Fast Fourier Transform (FFT) and Short-Time Fourier Transform (STFT) to analyze the audio data and map it to predefined mouth shapes, enabling realistic lip-syncing for animated characters.
+
+## Version
+
+1.0.0
 
 ## Features
 
 -   **Audio Processing**: Analyzes WAV audio files to extract frequency and magnitude data.
 -   **Mouth Shape Mapping**: Maps audio data to mouth shapes based on frequency ranges.
--   **Smoothing**: Provides smooth transitions between mouth shapes for natural animations.
--   **Customizable**: Allows customization of mouth shape thresholds.
+-   **Client-Side Execution**: Can run on the client side, making it easy to use with no need for server configuration.
 
 ## Installation
 
@@ -44,3 +49,13 @@ The processAudioFile function returns an array of mouth cues with start and end 
     { start: "0.43", end: "0.47", value: "idle position" },
 ];
 ```
+
+## Community and Contributions
+
+lipsync-js is a community project open to the public. Contributions, feedback, and participation are welcome and encouraged. Together, we can improve and expand the capabilities of this library to benefit everyone.
+
+## Copyright
+
+© 2024 lipsync-js contributors. This project is licensed under the MIT License.
+
+Feel free to let me know if you need any further changes!
