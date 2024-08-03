@@ -9,10 +9,15 @@ function computeSTFT(audioData, sampleRate, windowSize, overlap) {
 
     const stftResults = [];
 
+    // Iterate over the audio data in windows of size windowSize
+    // that means that the audio data is split into windows of 1024 samples
     for (let i = 0; i < numWindows; i++) {
+        // Calculate the start and end indices of the window
+        // that will represent the time domain of the audio data
         const start = i * stepSize;
         const end = start + windowSize;
 
+        // Break if the end index exceeds the audio data lengths
         if (end > audioData.length) {
             break;
         }
@@ -25,6 +30,7 @@ function computeSTFT(audioData, sampleRate, windowSize, overlap) {
         const frequencies = fftUtil.fftFreq(phasors, sampleRate);
         const magnitudes = fftUtil.fftMag(phasors);
 
+        // form an object with the start and end time of the window, the frequencies and magnitudes
         stftResults.push({
             startTime: start / sampleRate,
             endTime: end / sampleRate,
@@ -38,6 +44,8 @@ function computeSTFT(audioData, sampleRate, windowSize, overlap) {
 
 // Function to process the audio data and map to mouth shapes
 function processAudio(leftChannelData, sampleRate) {
+    // convert the left channel data to an array so we can have access
+    // to the array methods
     let leftChannelArray = Array.from(leftChannelData);
 
     // Define parameters for STFT

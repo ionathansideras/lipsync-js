@@ -9,12 +9,6 @@
 -   **Smoothing**: Provides smooth transitions between mouth shapes for natural animations.
 -   **Customizable**: Allows customization of mouth shape thresholds.
 
-## Phonemes Table
-
-This is a table that shows each phoneme of the English language and their average frequency, mouth position
-
-![Phonemes table](image.png)
-
 ## Installation
 
 Install the library using npm:
