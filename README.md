@@ -27,7 +27,8 @@ Example Usage
 ```js
 const { processAudioFile } = require("lipsync-js");
 
-processAudioFile("path/to/your/audiofile.wav")
+// accepts only WAV files
+processAudioFile(buffer)
     .then((mouthCues) => {
         console.log(mouthCues);
     })
