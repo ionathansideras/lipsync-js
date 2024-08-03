@@ -1,11 +1,8 @@
-const fs = require("fs");
 const wav = require("wav-decoder");
 const { processAudio } = require("./processAudio");
 
 // Main function to process the audio file
-async function processAudioFile(filePath) {
-    const buffer = fs.readFileSync(filePath);
-
+async function processAudioFile(buffer) {
     try {
         const audioData = await wav.decode(buffer);
         const leftChannelData = audioData.channelData[0]; // Get the left channel data

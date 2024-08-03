@@ -3,12 +3,15 @@ const cors = require("cors"); // Import the cors package
 const { processAudioFile } = require("./src/index.js");
 const app = express();
 const port = 3000;
+const fs = require("fs");
 
 app.use(cors()); // Use the cors middleware
 app.use(express.static("public"));
 
 app.get("/process-audio", (req, res) => {
-    processAudioFile("secret.wav")
+    // import the audio file
+    const buffer = fs.readFileSync("secret.wav");
+    processAudioFile(buffer)
         .then((mouthCues) => {
             res.json({ message: mouthCues });
         })
