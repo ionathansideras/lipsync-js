@@ -37,8 +37,9 @@ processAudioFile(buffer)
     });
 ```
 
-Example Output
-The processAudioFile function returns an array of mouth cues with start and end times, and the corresponding mouth shape:
+The processAudioFile function returns an array of mouth cues with start and end times, and the corresponding mouth shape. This can be used to animate 3D avatars on the web.
+
+Example Output:
 
 ```js
 [
@@ -49,6 +50,8 @@ The processAudioFile function returns an array of mouth cues with start and end 
     { start: "0.43", end: "0.47", value: "idle position" },
 ];
 ```
+
+![morph](image-1.png)
 
 ## Community and Contributions
 
