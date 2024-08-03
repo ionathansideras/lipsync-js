@@ -10,7 +10,6 @@ app.use(express.static("public"));
 app.get("/process-audio", (req, res) => {
     processAudioFile("secret.wav")
         .then((mouthCues) => {
-            console.log("Processed audio file:", mouthCues);
             res.json({ message: mouthCues });
         })
         .catch((err) => {

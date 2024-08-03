@@ -1,4 +1,3 @@
-// Function to compute Short-Time Fourier Transform (STFT)
 const fft = require("fft-js").fft;
 const fftUtil = require("fft-js").util;
 const { mouthCues } = require("./mouthMap");
@@ -66,33 +65,116 @@ function processAudio(leftChannelData, sampleRate) {
 function getMouthShape(data, mouthCues) {
     if (data.frequencies.length === 0) return null; // No frequencies to process
 
-    // Find the index of the maximum magnitude
-    const maxMagnitudeIndex = data.magnitudes.indexOf(
-        Math.max(...data.magnitudes)
+    // Identify the top 3 peaks (which could correspond to F1, F2, and F3)
+    const peakIndices = getTopNIndices(data.magnitudes, 3);
+    // get the frequencies of the magnitudes indexes
+    const dominantFrequencies = peakIndices.map(
+        (index) => data.frequencies[index]
     );
-    const dominantFrequency = data.frequencies[maxMagnitudeIndex];
 
-    for (let key in mouthCues) {
-        if (
-            dominantFrequency >= mouthCues[key].low &&
-            dominantFrequency < mouthCues[key].high
-        ) {
+    console.log("Dominant Frequencies:", dominantFrequencies);
+
+    // ===========================================================
+    // now i have the 3 dominant frequencies, i need to compare them to the mouthCues objects ????
+    // idk if thats accurate and right, but i think i need to compare them
+    // ===========================================================
+
+    // Check for vowels (which have specific formant frequencies F1 and F2)
+    for (let key in mouthCues.vowels) {
+        const cue = mouthCues.vowels[key];
+        const formantMatch = dominantFrequencies
+            .slice(0, 2)
+            .every((freq, i) => {
+                const formantRange = cue[`f${i + 1}`];
+                if (formantRange) {
+                    console.log(
+                        `Checking formant f${i + 1} for ${key} in vowels:`,
+                        formantRange,
+                        "with frequency:",
+                        freq
+                    );
+                    return freq >= formantRange.low && freq < formantRange.high;
+                }
+                return false;
+            });
+
+        if (formantMatch) {
+            console.log(`Match found for ${key} in vowels`);
             return {
                 start: data.startTime,
                 end: data.endTime,
                 value: key,
-                frequency: dominantFrequency,
+                category: "vowels",
+                frequencies: dominantFrequencies,
             };
         }
     }
+
+    // Check for nasals (which have specific formant frequencies F1, F2, and F3)
+    for (let key in mouthCues.nasals) {
+        const cue = mouthCues.nasals[key];
+        const formantMatch = dominantFrequencies.every((freq, i) => {
+            const formantRange = cue[`f${i + 1}`];
+            if (formantRange) {
+                console.log(
+                    `Checking formant f${i + 1} for ${key} in nasals:`,
+                    formantRange,
+                    "with frequency:",
+                    freq
+                );
+                return freq >= formantRange.low && freq < formantRange.high;
+            }
+            return false;
+        });
+
+        if (formantMatch) {
+            console.log(`Match found for ${key} in nasals`);
+            return {
+                start: data.startTime,
+                end: data.endTime,
+                value: key,
+                category: "nasals",
+                frequencies: dominantFrequencies,
+            };
+        }
+    }
+
+    // Check for fricatives (which are characterized by their overall spectral energy distribution)
+    for (let key in mouthCues.fricatives) {
+        const cue = mouthCues.fricatives[key];
+        const maxFreq = dominantFrequencies[0]; // Considering the most dominant frequency
+
+        if (maxFreq >= cue.low && maxFreq < cue.high) {
+            console.log(
+                `Match found for ${key} in fricatives with frequency: ${maxFreq}`
+            );
+            return {
+                start: data.startTime,
+                end: data.endTime,
+                value: key,
+                category: "fricatives",
+                frequencies: dominantFrequencies,
+            };
+        }
+    }
+
+    console.log("No match found, defaulting to idle position");
 
     // Default case if no matching mouth cue is found
     return {
         start: data.startTime,
         end: data.endTime,
         value: "idle position",
-        frequency: dominantFrequency,
+        frequencies: dominantFrequencies,
     };
+}
+
+// Helper function to get the indices of the top N values in an array
+function getTopNIndices(arr, n) {
+    // finds the 3 highest values in the magnitude array
+    const indices = Array.from(arr.keys());
+    indices.sort((a, b) => arr[b] - arr[a]);
+    return indices.slice(0, n);
 }
 
 module.exports = { processAudio };
