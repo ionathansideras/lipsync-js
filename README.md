@@ -12,7 +12,6 @@
 
 -   **Audio Processing**: Analyzes WAV audio files to extract frequency and magnitude data.
 -   **Mouth Shape Mapping**: Maps audio data to mouth shapes based on frequency ranges.
--   **Client-Side Execution**: Can run on the client side, making it easy to use with no need for server configuration.
 
 ## Installation
 
