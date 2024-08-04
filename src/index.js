@@ -5,7 +5,6 @@ import { processAudio } from "./processAudio.js";
 async function processAudioFile(buffer) {
     try {
         const audioData = await wav.decode(buffer);
-        console.log("Audio Data:", audioData);
         const leftChannelData = audioData.channelData[0]; // Get the left channel data
         const sampleRate = audioData.sampleRate; // Get the sample rate of the audio
         return processAudio(leftChannelData, sampleRate); // Process the left channel data
