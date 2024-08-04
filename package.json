@@ -2,6 +2,7 @@
     "name": "lipsync-js",
     "version": "1.0.0",
     "description": "A powerful library for processing audio files and generating mouth shapes for lip-sync animations.",
+    "type": "module",
     "main": "src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

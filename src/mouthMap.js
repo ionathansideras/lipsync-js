@@ -1,15 +1,3 @@
-// const mouthCues = {
-//     closed: { low: 200, high: 400 }, // Ⓐ: "M", "N" (closed mouth)
-//     "slightly open": { low: 400, high: 600 }, // Ⓑ: "I", "E", "T", "S", "L" (slightly open mouth with clenched teeth)
-//     open: { low: 600, high: 800 }, // Ⓒ: "AE", "EH" (open mouth)
-//     "wide open": { low: 800, high: 1000 }, // Ⓓ: "AA" (wide open mouth)
-//     "slightly rounded": { low: 1000, high: 1200 }, // Ⓔ: "U", "O", "W" (slightly rounded mouth)
-//     "puckered lips": { low: 1200, high: 1400 }, // Ⓕ: "OW", "UW" (puckered lips)
-//     "upper teeth touching lower lip": { low: 1400, high: 1600 }, // Ⓖ: "F", "V" (upper teeth touching lower lip)
-//     "tongue raised behind upper teeth": { low: 1600, high: 1800 }, // Ⓗ: "L", "SH" (tongue raised behind upper teeth)
-//     "idle position": { low: 1800, high: 2000 }, // Ⓧ: pauses (idle position)
-//     "slightly open": { low: 2000, high: 6200 }, // Ⓨ: "TH" (slightly open mouth with clenched teeth)
-// };
 const mouthCues = {
     // Formants for vowels
     vowels: {
@@ -53,4 +41,4 @@ const mouthCues = {
     },
 };
 
-module.exports = { mouthCues };
+export { mouthCues };
