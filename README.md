@@ -4,7 +4,7 @@
 
 ## Version
 
-1.0.0
+1.0.5
 
 **Note**: This version doesn't work as expected. we are facing an accuracy problem and are working on it.
 
