@@ -1,12 +1,12 @@
-# lipsync-js
+# lipsync-js (Development Branch)
 
 ![lipsync-js](image.png)
 
 ## Version
 
-1.0.5
+Development Branch
 
-**Note**: This version doesn't work as expected. we are facing an accuracy problem and are working on it.
+**Note**: This branch is under active development. Features and functionality may change frequently.
 
 ## Introduction
 
@@ -17,48 +17,42 @@
 -   **Audio Processing**: Analyzes WAV audio files to extract frequency and magnitude data.
 -   **Mouth Shape Mapping**: Maps audio data to mouth shapes based on frequency ranges.
 
-## Installation
+## Getting Started
 
-Install the library using npm:
+To get started with the development branch, follow these steps:
 
-```bash
-npm install lipsync-js
-```
+1. Clone the repository:
 
-Usage
-Example Usage
+    ```bash
+    git clone https://github.com/ionathansideras/lipsync-js.git
+    ```
 
-```js
-import processAudioFile from "lipsync-js";
+2. Navigate to the project directory:
 
-// Accepts only WAV files
-async function handleAudioFile(buffer) {
-    try {
-        // Call the processAudioFile with the WAV buffer
-        // and it will return the mouthCues
-        const mouthCues = await processAudioFile(buffer);
-        console.log(mouthCues);
-    } catch (err) {
-        console.error("Error processing audio file:", err);
-    }
-}
-```
+    ```bash
+    cd lipsync-js
+    ```
 
-The processAudioFile function returns an array of mouth cues with start and end times, and the corresponding mouth shape. This can be used to animate 3D avatars on the web.
+3. Install the dependencies:
 
-Example Output:
+    ```bash
+    npm install
+    ```
 
-```js
-[
-    { start: "0.00", end: "0.05", value: "closed mouth" },
-    { start: "0.05", end: "0.27", value: "open mouth" },
-    { start: "0.27", end: "0.31", value: "idle position" },
-    { start: "0.31", end: "0.43", value: "idle position" },
-    { start: "0.43", end: "0.47", value: "idle position" },
-];
-```
+4. Start the backend server:
 
-![morph](image-1.png)
+    ```bash
+    npm start
+    ```
+
+5. Open the `index.html` file. It is recommended to use the VS Code Live Server extension for this:
+
+    - Install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in VS Code.
+    - Right-click on `index.html` and select "Open with Live Server".
+
+## Code Structure
+
+The main code is located in the `src` directory. If you need to change the `.wav` file, you will need to update the file path in both the `index.html` file and the `tts.js` file.
 
 ## Community and Contributions
 

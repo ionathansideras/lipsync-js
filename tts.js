@@ -9,6 +9,7 @@ app.use(cors()); // Use the cors middleware
 app.use(express.static("public"));
 
 app.get("/process-audio", (req, res) => {
+    console.log("Processing audio file...");
     // import the audio file
     const buffer = fs.readFileSync("secret.wav");
     processAudioFile(buffer)

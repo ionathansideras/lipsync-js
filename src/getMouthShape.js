@@ -11,8 +11,6 @@ function getMouthShape(data, mouthCues) {
         (index) => data.frequencies[index]
     );
 
-    console.log("Dominant Frequencies:", dominantFrequencies);
-
     // ===========================================================
     // now i have the 3 dominant frequencies, i need to compare them to the mouthCues objects ????
     // idk if thats accurate and right, but i think i need to compare them
@@ -26,19 +24,12 @@ function getMouthShape(data, mouthCues) {
             .every((freq, i) => {
                 const formantRange = cue[`f${i + 1}`];
                 if (formantRange) {
-                    console.log(
-                        `Checking formant f${i + 1} for ${key} in vowels:`,
-                        formantRange,
-                        "with frequency:",
-                        freq
-                    );
                     return freq >= formantRange.low && freq < formantRange.high;
                 }
                 return false;
             });
 
         if (formantMatch) {
-            console.log(`Match found for ${key} in vowels`);
             return {
                 start: data.startTime,
                 end: data.endTime,
@@ -55,19 +46,12 @@ function getMouthShape(data, mouthCues) {
         const formantMatch = dominantFrequencies.every((freq, i) => {
             const formantRange = cue[`f${i + 1}`];
             if (formantRange) {
-                console.log(
-                    `Checking formant f${i + 1} for ${key} in nasals:`,
-                    formantRange,
-                    "with frequency:",
-                    freq
-                );
                 return freq >= formantRange.low && freq < formantRange.high;
             }
             return false;
         });
 
         if (formantMatch) {
-            console.log(`Match found for ${key} in nasals`);
             return {
                 start: data.startTime,
                 end: data.endTime,
@@ -84,9 +68,6 @@ function getMouthShape(data, mouthCues) {
         const maxFreq = dominantFrequencies[0]; // Considering the most dominant frequency
 
         if (maxFreq >= cue.low && maxFreq < cue.high) {
-            console.log(
-                `Match found for ${key} in fricatives with frequency: ${maxFreq}`
-            );
             return {
                 start: data.startTime,
                 end: data.endTime,
@@ -96,8 +77,6 @@ function getMouthShape(data, mouthCues) {
             };
         }
     }
-
-    console.log("No match found, defaulting to idle position");
 
     // Default case if no matching mouth cue is found
     return {
