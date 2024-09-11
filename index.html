@@ -6,9 +6,16 @@
         <title>Audio with Mouth Cues</title>
     </head>
     <body>
+        <a-scene embedded arjs>
+            <a-marker preset="hiro">
+                <a-box position="0 0.5 0" material="color: yellow;"></a-box>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+
         <button id="startButton">Start Processing</button>
         <audio id="audioPlayer" controls style="display: none">
-            <source src="secret.wav" type="audio/wav" />
+            <source src="speach2.wav" type="audio/wav" />
             Your browser does not support the audio element.
         </audio>
         <h1 id="mouthCueDisplay"></h1>
@@ -30,7 +37,7 @@
                             audioPlayer.play();
 
                             // Set playback rate for slow motion
-                            audioPlayer.playbackRate = 0.2;
+                            audioPlayer.playbackRate = 1;
 
                             const currentTimeClosure = (() => {
                                 let currentTime = 0;

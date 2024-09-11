@@ -20,6 +20,8 @@ function processAudio(leftChannelData, sampleRate) {
         overlap
     );
 
+    console.log("STFT Results:", stftResults);
+
     // Map frequencies to mouth shapes
     const mappedShapes = stftResults.map((data) => {
         return getMouthShape(data, mouthCues);

@@ -11,7 +11,7 @@ app.use(express.static("public"));
 app.get("/process-audio", (req, res) => {
     console.log("Processing audio file...");
     // import the audio file
-    const buffer = fs.readFileSync("secret.wav");
+    const buffer = fs.readFileSync("speach2.wav");
     processAudioFile(buffer)
         .then((mouthCues) => {
             res.json({ message: mouthCues });
